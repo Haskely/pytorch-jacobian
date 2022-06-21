@@ -165,9 +165,7 @@ is_grads_batched 默认为 False，若设置为 True 会完全改变程序行为
 ### is_grads_batched = True 时程序行为：
 
 $$
-
 \begin{aligned}   \text{输入：}& \vec{y}_j, ~ \vec{x}_i, ~ \mathbf{V}_j; ~i=1,\dots,m;~ j = 1,\dots,n;~\vec{y}_j \text{与} \mathbf{V}_j\text{第一维的每个元素形状一致}.\\     \text{记 } \vec{y}_i &= (y_{i_1}, y_{i_2}, \dots, y_{i_p})，\mathbf{V}_i = \begin{pmatrix}     v_{i_{11}} & \cdots & v_{i_{1p}} \\     \vdots & \ddots & \vdots \\     v_{i_{N1}} & \cdots & v_{i_{Np}}   \end{pmatrix} ， \\ \text{令 } \vec{y} &= \sum_{j=1}^{n} \mathbf{V}_j \cdot \vec{y}_j^T, ~ “~ \cdot ~” \text{为矩阵乘法运算}\\ \text{对任意 } i &\in \{ 1,2,\dots,m\},\\ \text{记 } \vec{x}_i &= (x_{i_1}, x_{i_2}, \dots, x_{i_s})， \\ \text{则 } \vec{g}_i &= \nabla_{\vec{x}_i} \vec{y} = \begin{pmatrix}     \frac{\partial y_1 }{\partial \vec{x}_{i_1}} & \cdots & \frac{\partial y_1 }{\partial \vec{x}_{i_s}} \\     \vdots & \ddots & \vdots \\     \frac{\partial y_p }{\partial \vec{x}_{i_1}} & \cdots & \frac{\partial y_p }{\partial \vec{x}_{i_s}}  \end{pmatrix}; \\   \text{输出元组 }& \mathbf{g} = \left(\vec{g}_1, \vec{g}_2, \dots, \vec{g}_m \right) \end{aligned}
-
 $$
 
 ## 个人总结
@@ -335,7 +333,7 @@ batched_J = batched_jacobian(batched_y,batched_x)
          [3., 6.]]]) """
 ```
 
-**注意：根据官方文档这并非最高效率实现。 Pytorch 1.11.0 推出了 [functorch](https://pytorch.org/functorch/stable/) beta 版，使用内置的 jacrev 以及 vmap + jacrev 为 pytorch 框架下目前最高效的 “雅可比矩阵 API”  以及 “批量雅可比矩阵 API” 实现。**但是该库目前处于快速迭代期，同时对 windows 平台支持不友好，不如上面的实现稳定性好。
+**注意：根据官方文档这并非最高效率实现。 Pytorch 1.11.0 推出了 [functorch](https://pytorch.org/functorch/stable/) beta 版，使用内置的 jacrev 以及 vmap + jacrev 为 pytorch 框架下目前最高效的 “雅可比矩阵 API”  以及 “批量雅可比矩阵 API” 实现。** 但是该库目前处于快速迭代期，同时对 windows 平台支持不友好，不如上面的实现稳定性好。
 完毕。
 
 
